@@ -1,0 +1,29 @@
+= form_for @calendar_of_the_championship do |f|
+  - if @calendar_of_the_championship.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@calendar_of_the_championship.errors.count, "error")} prohibited this calendar_of_the_championship from being saved:"
+      %ul
+        - @calendar_of_the_championship.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :gp_name
+    = f.text_field :gp_name
+  .field
+    = f.label :number
+    = f.text_field :number
+  .field
+    = f.label :race_date
+    .input-group.date.datepicker
+      = f.text_field(:race_date, value: lnil(f.object.race_date),
+      class: 'form-control')
+      %span.input-group-addon
+        %span.glyphicon.glyphicon-calendar
+  .field
+    = f.label :country
+    = f.text_field :country
+  .field
+    = f.label :location
+    = f.text_field :location
+  .actions
+    = f.submit 'Сохранить', class: "btn btn-primary"

@@ -1,0 +1,72 @@
+= form_for @team do |f|
+  - if @team.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@team.errors.count, "error")} prohibited this team from being saved:"
+      %ul
+        - @team.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :team_name
+    = f.text_field :team_name
+  .field
+    = f.label :motor_manufacturer
+    = f.text_field :motor_manufacturer
+  .field
+    = f.label :car_number1
+    = f.text_field :car_number1
+  .field
+    = f.label :car_number2
+    = f.text_field :car_number2
+  .field
+    = f.label :team_country
+    = f.text_field :team_country
+  %hr
+  = f.fields_for :racer1 do |ff|
+    .field
+      = ff.label :surname
+      = ff.text_field :surname
+    .field
+      = ff.label :firstname
+      = ff.text_field :firstname
+    .field
+      = ff.label :bday
+      .input-group.date.datepicker
+        = ff.text_field(:bday, value: lnil(ff.object.bday),
+        class: 'form-control')
+        %span.input-group-addon
+          %span.glyphicon.glyphicon-calendar
+    .field
+      = ff.label :country
+      = ff.text_field :country
+    .field
+      = ff.label :number_of_wins
+      = ff.number_field :number_of_wins
+    .field
+      = ff.hidden_field :id
+  %hr
+  = f.fields_for :racer2 do |ff|
+    .field
+      = ff.label :surname
+      = ff.text_field :surname
+    .field
+      = ff.label :firstname
+      = ff.text_field :firstname
+    .field
+      = ff.label :bday
+      .input-group.date.datepicker
+        = ff.text_field(:bday, value: lnil(ff.object.bday),
+        class: 'form-control')
+        %span.input-group-addon
+          %span.glyphicon.glyphicon-calendar
+    .field
+      = ff.label :country
+      = ff.text_field :country
+    .field
+      = ff.label :number_of_wins
+      = ff.number_field :number_of_wins
+    .field
+      = ff.hidden_field :id
+  %hr
+  .actions
+    = f.submit 'Сохранить', class: "btn btn-primary"
